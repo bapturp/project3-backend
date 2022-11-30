@@ -23,6 +23,11 @@ const serviceSchma = new Schema(
       type: Location,
       required: true,
     },
+    tag: {
+      type: [Schema.Type.ObjectID],
+      ref: 'Tag',
+      required: true,
+    },
   },
   {
     timestamps: true,
