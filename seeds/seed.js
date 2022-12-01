@@ -15,7 +15,7 @@ const userSeed = require('./user.seeds.json');
 const seeding = async () => {
   try {
     const deletedUsers = await User.deleteMany();
-    console.log(`Deleted users: ${deletedUsers.length}`);
+    console.log(`Deleted users: ${deletedUsers.deletedCount}`);
 
     const createdUsers = await User.create(userSeed);
     console.log(`Created users: ${createdUsers.length}`);

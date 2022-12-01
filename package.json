@@ -8,7 +8,7 @@
 		"seed": "node ./seeds/seed.js"
 	},
 	"dependencies": {
-		"bcryptjs": "^2.4.3",
+		"bcrypt": "^5.1.0",
 		"cloudinary": "^1.28.1",
 		"cors": "^2.8.5",
 		"debug": "~2.6.9",
