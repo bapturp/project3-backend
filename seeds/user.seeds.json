@@ -1,0 +1,17 @@
+[
+  {
+    "username": "alice",
+    "email": "alice@example.com",
+    "password": "$2a$10$GI2GgXein9ROMx33NaPYge7FTT//ytvOr3vuT7ZZZdH8DNgepEnlO"
+  },
+  {
+    "username": "bob",
+    "email": "bob@example.com",
+    "password": "$2a$10$/Lgi1Xa.ZiFYT.wh6PMCq.9WkevpLgkKxb1T1vLVGyRHP7GQwc5gq"
+  },
+  {
+    "username": "charlie",
+    "email": "charlie@example.com",
+    "password": "$2a$10$16UBADqnpVLjrFeQ0ZcbOOfAxHmZrLEoso8hp7Dou531ISSXzBZNa"
+  }
+]

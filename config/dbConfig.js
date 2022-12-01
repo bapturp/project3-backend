@@ -1,8 +1,20 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const endpoint = process.env.MONGO_URI || "mongodb://localhost/fullstack-app";
+if (!process.env.MONGODB_URI) {
+  console.log('Environment variable MONGODB_URI is missing or empty.');
+  return;
+}
+const endpoint = process.env.MONGODB_URI;
 
-mongoose
-	.connect(endpoint)
-	.then((db) => console.log("DB connected: ", db.connection.name))
-	.catch((e) => console.error(e));
+const mongoConnection = async () => {
+  try {
+    const {
+      connection: { host, port, name },
+    } = await mongoose.connect(endpoint);
+    console.log(`DB ${name} on host ${host}:${port} connected.`);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+mongoConnection();
