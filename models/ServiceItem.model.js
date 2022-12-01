@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 const serviceItemSchema = new Schema(
   {
     service: {
-      type: [Schema.Type.ObjectID],
+      type: Schema.Types.ObjectId,
       ref: 'Service',
       required: true,
     },
@@ -25,4 +25,6 @@ const serviceItemSchema = new Schema(
   },
 );
 
-module.exports = model('ServiceItem', serviceItemSchema);
+const ServiceItem = model('ServiceItem', serviceItemSchema);
+
+module.exports = ServiceItem;
