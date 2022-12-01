@@ -6,11 +6,7 @@ const isAuthenticated = require('../middlewares/jwt.middleware');
 const User = require('../models/User.model');
 const saltRounds = 10;
 
-/**
- *
- * * All the routes are prefixed with `/api/auth`
- *
- */
+// All the routes are prefixed with `/api/v1/auth`
 
 router.post('/signup', async (req, res, next) => {
   const { name, email, password } = req.body;
