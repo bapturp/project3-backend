@@ -23,4 +23,5 @@ const reservationSchema = new Schema(
   },
 );
 
-module.exports = model('Reservation', reservationSchema);
+const Reservation = model('Reservation', reservationSchema);
+module.exports = Reservation;

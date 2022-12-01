@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 const serviceSchma = new Schema(
   {
     provider: {
-      type: Schema.Type.ObjectID,
+      type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
@@ -20,11 +20,11 @@ const serviceSchma = new Schema(
       required: false,
     },
     location: {
-      type: Location,
-      required: true,
+      type: { type: String },
+      coordinates: [Number],
     },
     tags: {
-      type: [Schema.Type.ObjectID],
+      type: [Schema.Types.ObjectId],
       ref: 'Tag',
       required: true,
     },
@@ -33,3 +33,7 @@ const serviceSchma = new Schema(
     timestamps: true,
   },
 );
+
+const Service = model('Service', serviceSchma);
+
+module.exports = Service;
