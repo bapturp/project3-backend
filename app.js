@@ -19,8 +19,8 @@ app.use(
   }),
 );
 
-app.use('/api', require('./routes/index'));
-app.use('/api/auth', require('./routes/auth'));
+app.use('/api/v1', require('./routes/index'));
+app.use('/api/v1/auth', require('./routes/auth'));
 
 require('./error-handling/index')(app);
 
