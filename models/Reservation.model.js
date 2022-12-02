@@ -3,17 +3,17 @@ const { Schema, model } = require('mongoose');
 const reservationSchema = new Schema(
   {
     serviceItem: {
-      type: [Schema.Type.ObjectID],
+      type: [Schema.Types.ObjectId],
       ref: 'ServiceItem',
       required: true,
     },
     consumer: {
-      type: Schema.Type.ObjectID,
+      type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
     provider: {
-      type: Schema.Type.ObjectID,
+      type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },

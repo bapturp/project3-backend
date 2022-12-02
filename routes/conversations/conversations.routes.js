@@ -7,7 +7,7 @@ router.get('/', protectRoute, async (req, res, next) => {
   try {
     data = await Conversation.find({ participants: { $in: req.userId } });
     console.log(data);
-    if (!data) return res.status(404);
+    if (!data) return res.sendStatus(404);
     res.json(data);
   } catch (error) {
     console.error(error);
@@ -23,7 +23,7 @@ router.post('/', protectRoute, async (req, res, next) => {
     return res.json(result);
   } catch (error) {
     console.error(error);
-    return res.status(500);
+    return res.status(400).json(error);
   }
 });
 
@@ -51,3 +51,5 @@ router.post('/:coversationId', protectRoute, async (req, res, next) => {
     return next(error);
   }
 });
+
+module.exports = router;
