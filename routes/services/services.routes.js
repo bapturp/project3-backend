@@ -2,7 +2,7 @@ const router = require('express').Router();
 // const isAuthenticated = require('../../middlewares/jwt.middleware');
 const protectRoute = require('../../middlewares/protectRoute');
 const Service = require('../../models/Service.model');
-const uploader = require('./../config/cloudinary');
+const uploader = require('../../config/cloudinary');
 
 router.get('/', protectRoute, async (req, res, next) => {
   try {
@@ -48,6 +48,6 @@ router.post('/:serviceId', uploader.single('picture'), async (req, res, next) =>
   }
 });
 
-router.use('/:serviceId/serviceItems', require('./services/serviceItems.routes.js'));
+router.use('/:serviceId/serviceItems', require('./serviceItems.routes.js'));
 
 module.exports = router;

@@ -12,6 +12,7 @@ app.set('trust proxy', 1);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+console.log(process.env.FRONTEND_URL);
 app.use(
   cors({
     origin: [process.env.FRONTEND_URL],
@@ -21,7 +22,7 @@ app.use(
 
 app.use('/api/v1', require('./routes/index'));
 app.use('/api/v1/auth', require('./routes/auth'));
-app.use('/api/v1/services', require('./services/services.routes.js'));
+app.use('/api/v1/services', require('./routes/services/services.routes'));
 
 require('./error-handling/index')(app);
 
