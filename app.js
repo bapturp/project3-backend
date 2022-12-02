@@ -23,6 +23,7 @@ app.use(
 app.use('/api/v1', require('./routes/index'));
 app.use('/api/v1/auth', require('./routes/auth'));
 app.use('/api/v1/services', require('./routes/services/services.routes'));
+app.use('/api/v1/conversations', require('./routes/conversations/conversations.routes'));
 
 require('./error-handling/index')(app);
 
