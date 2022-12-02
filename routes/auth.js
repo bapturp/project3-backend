@@ -13,8 +13,8 @@ const saltRounds = 10;
  */
 
 router.post('/signup', async (req, res, next) => {
-  const { name, email, password } = req.body;
-  if (email === '' || name === '' || password === '') {
+  const { username, email, password } = req.body;
+  if (email === '' || username === '' || password === '') {
     res.status(400).json({ message: 'I need some informations to work with here!' });
   }
 
@@ -40,7 +40,7 @@ router.post('/signup', async (req, res, next) => {
     const hashedPass = await bcrypt.hash(password, saltRounds);
 
     const createdUser = await User.create({
-      name,
+      username,
       email,
       password: hashedPass,
     });
