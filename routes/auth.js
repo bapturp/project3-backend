@@ -66,7 +66,7 @@ router.post('/signin', async (req, res, next) => {
   try {
     const foundUser = await User.findOne({ email });
     if (!foundUser) {
-      res.status.apply(401).json({ message: "You're not yourself." });
+      res.status(401).json({ message: "You're not yourself." });
       return;
     }
     const goodPass = await bcrypt.compare(password, foundUser.password);
