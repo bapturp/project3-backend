@@ -14,6 +14,11 @@ const messageSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  conversation: {
+    type: Schema.Types.ObjectId,
+    ref: 'Conversation',
+    required: true,
+  },
 });
 
 const Message = model('Message', messageSchema);

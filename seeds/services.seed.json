@@ -1,0 +1,45 @@
+[
+  {
+    "provider": "alice",
+    "consumer": "bob",
+    "title": "Piano lessons beginner to advanced",
+    "description": "Grand master Piano teacher with more than 10 years of experiences, can teach to any beginner to advanced. Feel free to reach me out for more information.",
+    "location": {
+      "type": "Point",
+      "coordinates": [48.86232, 2.36384]
+    },
+    "tags": ["Piano lessons"],
+    "serviceItems": [
+      {
+        "startDate": "2022-12-16T14:00:00.000+01:00",
+        "endDate": "2022-12-16T14:50:00.000+01:00",
+        "price": 20
+      },
+      {
+        "startDate": "2022-12-16T15:00:00.000+01:00",
+        "endDate": "2022-12-16T15:50:00.000+01:00",
+        "price": 20
+      },
+      {
+        "startDate": "2022-12-16T16:00:00.000+01:00",
+        "endDate": "2022-12-16T16:50:00.000+01:00",
+        "price": 20
+      },
+      {
+        "startDate": "2022-12-23T14:00:00.000+01:00",
+        "endDate": "2022-12-23T14:50:00.000+01:00",
+        "price": 20
+      },
+      {
+        "startDate": "2022-12-23T15:00:00.000+01:00",
+        "endDate": "2022-12-23T15:50:00.000+01:00",
+        "price": 20
+      },
+      {
+        "startDate": "2022-12-23T16:00:00.000+01:00",
+        "endDate": "2022-12-23T16:50:00.000+01:00",
+        "price": 20
+      }
+    ]
+  }
+]
