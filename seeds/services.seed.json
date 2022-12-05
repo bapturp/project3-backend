@@ -8,7 +8,7 @@
       "type": "Point",
       "coordinates": [48.86232, 2.36384]
     },
-    "tags": "Piano lessons",
+    "tags": ["Piano lessons"],
     "serviceItems": [
       {
         "startDate": "2022-12-16T14:00:00.000+01:00",

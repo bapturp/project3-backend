@@ -19,9 +19,22 @@ const servicesSeed = require('./services.seed.json');
 const reservationsSeed = require('./reservations.seed.json');
 const conversationsSeed = require('./conversations.seed.json');
 
-const seedingtags = async () => {
+const cleanUp = async () => {
   try {
+    await Message.deleteMany();
+    await Conversation.deleteMany();
+    await Reservation.deleteMany();
+    await ServiceItem.deleteMany();
+    await Service.deleteMany();
     await Tag.deleteMany();
+    await User.deleteMany();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const seedingTags = async () => {
+  try {
     await Tag.create(tagSeed);
   } catch (error) {
     console.error(error);
@@ -30,7 +43,6 @@ const seedingtags = async () => {
 
 const seedingUsers = async () => {
   try {
-    await User.deleteMany();
     await User.create(userSeed);
   } catch (error) {
     console.error(error);
@@ -39,24 +51,21 @@ const seedingUsers = async () => {
 
 const seedingServices = async () => {
   try {
-    await ServiceItem.deleteMany();
-    await Service.deleteMany();
-    await Tag.deleteMany();
+    for (let { serviceItems, provider, title, description, location, tags } of servicesSeed) {
+      const { _id: providerId } = await User.findOne({ username: provider }, { _id: 1 });
 
-    for (let service of servicesSeed) {
-      const { _id: providerId } = await User.findOne({ username: service.provider }, { _id: 1 });
-
-      const tags = await Tag.find({ $in: service.tags });
+      const tagsId = (await Tag.find({ tagName: { $in: tags } }, { _id: 1 })).map((e) => e._id);
+      console.log(tagsId);
 
       const { _id: createdService } = await Service.create({
-        title: service.title,
-        description: service.description,
-        tags,
-        location: service.location,
+        title: title,
+        description: description,
+        tags: tagsId,
+        location,
         provider: providerId,
       });
 
-      for (let { startDate, endDate, price } of service.serviceItems) {
+      for (let { startDate, endDate, price } of serviceItems) {
         await ServiceItem.create({ startDate, endDate, price, service: createdService });
       }
     }
@@ -67,8 +76,6 @@ const seedingServices = async () => {
 
 const seedingReservations = async () => {
   try {
-    await Reservation.deleteMany();
-
     for (let { serviceItems, consumer: consumerName, provider: providerName } of reservationsSeed) {
       const { _id: serviceItemId } = await ServiceItem.findOne({ startDate: serviceItems[0].startDate });
       const consumer = await User.findOne({ username: consumerName });
@@ -82,9 +89,6 @@ const seedingReservations = async () => {
 
 const seedingConversations = async () => {
   try {
-    await Message.deleteMany();
-    await Conversation.deleteMany();
-
     for (let { participants, service, messages } of conversationsSeed) {
       const { _id: serviceId } = await Service.findOne({ title: service }, { _id: 1 });
 
@@ -106,8 +110,9 @@ const seedingConversations = async () => {
 
 const seeding = async () => {
   try {
+    await cleanUp();
     await seedingUsers();
-    await seedingtags();
+    await seedingTags();
     await seedingServices();
     await seedingReservations();
     await seedingConversations();

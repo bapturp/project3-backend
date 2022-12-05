@@ -1,26 +1,26 @@
 [
   {
-    "name": "Tool"
+    "tagName": "Tool"
   },
   {
-    "name": "Service"
+    "tagName": "Service"
   },
   {
-    "name": "Moving"
+    "tagName": "Moving"
   },
   {
-    "name": "Car"
+    "tagName": "Car"
   },
   {
-    "name": "Camping gear" 
+    "tagName": "Camping gear"
   },
   {
-    "name": "Trailer"
+    "tagName": "Trailer"
   },
   {
-    "name": "Academic support"
+    "tagName": "Academic support"
   },
   {
-    "name": "Piano lessons"
+    "tagName": "Piano lessons"
   }
 ]
