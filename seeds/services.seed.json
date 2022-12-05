@@ -9,44 +9,6 @@
       "coordinates": [48.86232, 2.36384]
     },
     "tags": "Piano lessons",
-    "conversations": {
-      "participants": ["alice", "bob"],
-      "service": "Piano lessons beginner to advanced",
-      "messages": [
-        {
-          "sender": "bob",
-          "content": "Hello Alice"
-        },
-        {
-          "sender": "alice",
-          "content": "Hello Bob"
-        },
-        {
-          "sender": "bob",
-          "content": "I'm interested by a piano session!"
-        },
-        {
-          "sender": "alice",
-          "content": "Of course, what is your level?"
-        },
-        {
-          "sender": "bob",
-          "content": "beginner, but I have a bit of experience by teaching myself with books"
-        },
-        {
-          "sender": "alice",
-          "content": "Sounds good, your can book me. Check my availabilties!"
-        },
-        {
-          "sender": "bob",
-          "content": "Alright it's booked."
-        },
-        {
-          "sender": "alice",
-          "content": "Thanks bob, see you soon!"
-        }
-      ]
-    },
     "serviceItems": [
       {
         "startDate": "2022-12-16T14:00:00.000+01:00",
