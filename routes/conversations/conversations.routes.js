@@ -5,7 +5,15 @@ const Message = require('../../models/Message.models');
 
 router.get('/', protectRoute, async (req, res, next) => {
   try {
-    data = await Conversation.find({ participants: { $in: req.userId } });
+    data = await Conversation.find({ participants: { $in: req.userId } }).populate('participants', 'username');
+    data.map((conversation) => {
+      conversation.participants.filter((participant) => {
+        console.log(participant._id);
+        participant._id !== req.userId;
+        return participant;
+      });
+      return conversation;
+    });
     console.log(data);
     if (!data) return res.sendStatus(404);
     res.json(data);
@@ -20,6 +28,7 @@ router.post('/', protectRoute, async (req, res, next) => {
     const userA = req.userId;
 
     const result = await Conversation.create({ participants: [userA, userB], service });
+
     return res.json(result);
   } catch (error) {
     console.error(error);
@@ -31,7 +40,7 @@ router.post('/', protectRoute, async (req, res, next) => {
 router.get('/:coversationId', protectRoute, async (req, res, next) => {
   try {
     const conversation = req.params.coversationId;
-    const data = await Message.find({ conversation }).sort({ timestamps: 1 });
+    const data = await Message.find({ conversation }).sort({ timestamps: 1 }).populate('sender', 'username');
     return res.json(data);
   } catch (error) {
     return next(error);
