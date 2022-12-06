@@ -30,7 +30,7 @@ router.post('/', protectRoute, async (req, res, next) => {
 // TODO implement limit and pagination
 router.get('/:coversationId', protectRoute, async (req, res, next) => {
   try {
-    const conversation = req.body.coversationId;
+    const conversation = req.params.coversationId;
     const data = await Message.find({ conversation }).sort({ timestamps: 1 });
     return res.json(data);
   } catch (error) {
@@ -42,7 +42,11 @@ router.post('/:coversationId', protectRoute, async (req, res, next) => {
   try {
     const conversation = req.body.coversationId;
     const sender = req.userId;
-    const content = req.body;
+
+    // TODO implement post converstion
+    console.log('conversationId POST is not fully implemented');
+    console.log('req.body:' + req.body);
+    // const content = req.body;
 
     const data = await Message.create({ conversation, sender, content });
 
