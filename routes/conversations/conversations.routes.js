@@ -5,17 +5,10 @@ const Message = require('../../models/Message.models');
 
 router.get('/', protectRoute, async (req, res, next) => {
   try {
-    data = await Conversation.find({ participants: { $in: req.userId } }).populate('participants', 'username');
-    data.map((conversation) => {
-      conversation.participants.filter((participant) => {
-        console.log(participant._id);
-        participant._id !== req.userId;
-        return participant;
-      });
-      return conversation;
-    });
-    console.log(data);
-    if (!data) return res.sendStatus(404);
+    let data = await Conversation.find({ participants: { $in: req.userId } })
+      .populate('service', 'title')
+      .populate('participants', 'username');
+
     res.json(data);
   } catch (error) {
     console.error(error);

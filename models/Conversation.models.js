@@ -7,6 +7,7 @@ const conservationSchema = new Schema({
   },
   service: {
     type: Schema.Types.ObjectId,
+    ref: 'Service',
     required: true,
   },
 });
