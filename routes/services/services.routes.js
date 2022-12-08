@@ -15,39 +15,44 @@ router.get('/', protectRoute, async (req, res, next) => {
   }
 });
 
-router.post('/', protectRoute, uploader.single('picture'), async (req, res, next) => {
+router.post('/', protectRoute, uploader.single('pictureFile'), async (req, res, next) => {
   try {
-    console.log(res, req);
+    // console.log(req);
     const { title, description, coordinates, tags } = req.body; // ok
-
+    const tagsObj = JSON.parse(tags);
+    // console.log(title, description, coordinates, tagsObj);
     const filterTagName = {
       tagName: {
-        $in: tags.map(({ tagName }) => tagName),
+        $in: tagsObj.map(({ tagName }) => tagName),
       },
     };
 
-    const tagsList = awaitTag.find(filterTagName, {
+    // console.log(filterTagName);
+
+    const tagsList = await Tag.find(filterTagName, {
       _id: 1,
     });
-    console.log(tagsList);
+    // console.log(tagsList.map(({ _id }) => _id));
 
     let picture_url;
     if (req.file) {
       picture_url = req.file.path;
     }
-    const student = await Service.create({
+    // console.log('pictureurl', picture_url, 'req.file', req.file);
+
+    const service = await Service.create({
       provider: req.userId,
       title,
       description,
       picture_url,
       location: {
         type: 'Point',
-        coordinates,
+        coordinates: JSON.parse('[' + coordinates + ']'),
       },
-      tags: tagsList.maps(({ _id }) => _id),
+      tags: tagsList.map(({ _id }) => _id),
     });
 
-    res.status(201).json(student);
+    res.status(201).json({ service: service });
   } catch (error) {
     next(error);
   }
