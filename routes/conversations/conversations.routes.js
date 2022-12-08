@@ -2,13 +2,16 @@ const router = require('express').Router();
 const protectRoute = require('../../middlewares/protectRoute');
 const Conversation = require('../../models/Conversation.models');
 const Message = require('../../models/Message.models');
+const conversationAggregate = require('./conversationAggregate');
 
 router.get('/', protectRoute, async (req, res, next) => {
   try {
-    let data = await Conversation.find({ participants: { $in: req.userId } })
-      .populate('service', 'title')
-      .populate('participants', 'username');
+    const data = await Conversation.aggregate(conversationAggregate(req.userId));
 
+    // let data = await Conversation.find({ participants: { $in: req.userId } })
+    //   .populate('service', 'title')
+    //   .populate('participants', 'username');
+    console.log(data);
     res.json(data);
   } catch (error) {
     console.error(error);
