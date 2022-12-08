@@ -4,6 +4,7 @@ const protectRoute = require('../../middlewares/protectRoute');
 const Service = require('../../models/Service.model');
 const uploader = require('../../config/cloudinary');
 const Tag = require('../../models/Tag.model');
+const cloudinary = require('cloudinary').v2;
 
 router.get('/', protectRoute, async (req, res, next) => {
   try {
