@@ -15,7 +15,7 @@ const saltRounds = 10;
 router.post('/signup', async (req, res, next) => {
   const { username, email, password } = req.body;
   if (email === '' || username === '' || password === '') {
-    res.status(400).json({ message: 'I need some informations to work with here!' });
+    return res.status(400).json({ message: 'I need some informations to work with here!' });
   }
 
   // ! To use only if you want to enforce strong password (not during dev-time)
@@ -61,12 +61,12 @@ router.post('/signup', async (req, res, next) => {
 router.post('/signin', async (req, res, next) => {
   const { email, password } = req.body;
   if (email === '' || password === '') {
-    res.status(400).json({ message: 'I need some informations to work with here!' });
+    return res.status(400).json({ message: 'I need some informations to work with here!' });
   }
   try {
     const foundUser = await User.findOne({ email });
     if (!foundUser) {
-      res.status.apply(401).json({ message: "You're not yourself." });
+      res.status(401).json({ message: "You're not yourself." });
       return;
     }
     const goodPass = await bcrypt.compare(password, foundUser.password);
