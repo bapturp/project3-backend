@@ -3,7 +3,7 @@ const protectRoute = require('../../middlewares/protectRoute');
 const Conversation = require('../../models/Conversation.models');
 const Message = require('../../models/Message.models');
 const conversationAggregate = require('./conversationAggregate');
-
+//PROTECT ROUTE
 router.get('/', protectRoute, async (req, res, next) => {
   try {
     const data = await Conversation.aggregate(conversationAggregate(req.userId));
@@ -33,19 +33,19 @@ router.post('/', protectRoute, async (req, res, next) => {
 });
 
 // TODO implement limit and pagination
-router.get('/:coversationId', protectRoute, async (req, res, next) => {
+router.get('/:conversationId', protectRoute, async (req, res, next) => {
   try {
-    const conversation = req.params.coversationId;
+    const conversation = req.params.conversationId;
     const data = await Message.find({ conversation }).sort({ timestamps: 1 }).populate('sender', 'username');
     return res.json(data);
   } catch (error) {
-    return next(error);
+    return next(error); //// ERROR HANDLING
   }
 });
 
-router.post('/:coversationId', protectRoute, async (req, res, next) => {
+router.post('/:conversationId', protectRoute, async (req, res, next) => {
   try {
-    const conversation = req.body.coversationId;
+    const conversation = req.body.conversationId;
     const sender = req.userId;
 
     // TODO implement post converstion

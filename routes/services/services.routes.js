@@ -4,11 +4,24 @@ const protectRoute = require('../../middlewares/protectRoute');
 const Service = require('../../models/Service.model');
 const uploader = require('../../config/cloudinary');
 const Tag = require('../../models/Tag.model');
-const cloudinary = require('cloudinary').v2;
+const cloudinary = require('cloudinary').v2; //TODO : Delete Picture on cloudinary
 
 router.get('/', protectRoute, async (req, res, next) => {
   try {
-    res.status(200).json(await Service.find());
+    res.status(200).json(await Service.find({ provider: { $ne: req.userId } }));
+    //.populate('user')); //req.payload if isAuthentcated or req.userId if
+    //filter on not this user/payload
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/my', protectRoute, async (req, res, next) => {
+  try {
+    res
+      .status(200)
+      .json(await Service.find({ provider: req.userId }))
+      .populate('tags.tags');
     //.populate('user')); //req.payload if isAuthentcated or req.userId if
     //filter on not this user/payload
   } catch (error) {
@@ -61,7 +74,10 @@ router.post('/', protectRoute, uploader.single('pictureFile'), async (req, res, 
 
 router.get('/:serviceId', protectRoute, async (req, res, next) => {
   try {
-    res.status(200).json(await Service.findById(req.params.serviceId)); //.populate('user')); //req.payload //filter on not this user/payload
+    res
+      .status(200)
+      .json(await Service.findById(req.params.serviceId))
+      .populate('tags'); //.populate('user')); //req.payload //filter on not this user/payload
   } catch (error) {
     next(error);
   }
